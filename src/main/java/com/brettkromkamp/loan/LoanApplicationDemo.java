@@ -34,7 +34,7 @@ public class LoanApplicationDemo {
             // Fetch all loans
             System.out.println("All loans:");
             System.out.println("----------------------------------------");
-            for (Loan loan: loanRepository.findAll()) {
+            for (Loan loan : loanRepository.findAll()) {
                 System.out.println(loan.toString());
             }
             System.out.println();
@@ -48,7 +48,7 @@ public class LoanApplicationDemo {
             // Fetch all borrowers
             System.out.println("All borrowers:");
             System.out.println("----------------------------------------");
-            for (Borrower borrower: borrowerRepository.findAll()) {
+            for (Borrower borrower : borrowerRepository.findAll()) {
                 System.out.println(borrower.toString());
             }
             System.out.println();

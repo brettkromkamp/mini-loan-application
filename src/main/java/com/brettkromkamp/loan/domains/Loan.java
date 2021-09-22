@@ -13,7 +13,7 @@ public class Loan implements Serializable {
     private Long id;
 
     private float amount;               // Lanebelop
-    private String motivation;              // Behov
+    private String motivation;          // Behov
     private int duration;               // Lopetid
     private int deductionFreePeriod;    // Avdragsfri periode
     private String type;                // Type
