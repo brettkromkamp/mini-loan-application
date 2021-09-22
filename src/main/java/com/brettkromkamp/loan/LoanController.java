@@ -58,7 +58,7 @@ public class LoanController {
                 });
     }
 
-    // curl -X DELETE localhost:8080/api/v1/loans/99
+    // curl -X DELETE localhost:8080/api/v1/loans/1
     @DeleteMapping("/{id}")
     void delete(@PathVariable Long id) {
         loanRepository.deleteById(id);

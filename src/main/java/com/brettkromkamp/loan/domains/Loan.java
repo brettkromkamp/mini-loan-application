@@ -19,7 +19,7 @@ public class Loan implements Serializable {
     private int deductionFreePeriod;    // Avdragsfri periode
     private String type;                // Type
 
-    // Told Hibernate to initialise lazy state for outside transactions. Alternatively, could also set fet = FetchType.EAGER.
+    // Could also set fet = FetchType.EAGER.
     @OneToMany(mappedBy = "loan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Borrower> borrowers = new HashSet<>();
 
