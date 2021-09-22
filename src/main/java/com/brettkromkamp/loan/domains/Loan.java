@@ -1,9 +1,8 @@
 package com.brettkromkamp.loan.domains;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,7 +21,7 @@ public class Loan implements Serializable {
 
     // Told Hibernate to initialise lazy state for outside transactions. Alternatively, could also set fet = FetchType.EAGER.
     @OneToMany(mappedBy = "loan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Borrower> borrowers;
+    private Set<Borrower> borrowers = new HashSet<>();
 
     public Loan() {
 
@@ -90,6 +89,10 @@ public class Loan implements Serializable {
 
     public void setBorrowers(Set<Borrower> borrowers) {
         this.borrowers = borrowers;
+
+        for (Borrower borrower : borrowers) {
+            borrower.setLoan(this);
+        }
     }
 
     @Override

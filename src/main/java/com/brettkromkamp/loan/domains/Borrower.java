@@ -20,7 +20,7 @@ public class Borrower implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "loan_id", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Ignore the property when serializing to JSON
     private Loan loan;
 
     public Borrower() {

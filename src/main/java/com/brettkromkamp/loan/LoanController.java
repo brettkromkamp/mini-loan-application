@@ -1,6 +1,5 @@
 package com.brettkromkamp.loan;
 
-import com.brettkromkamp.loan.domains.Borrower;
 import com.brettkromkamp.loan.domains.Loan;
 import com.brettkromkamp.loan.repositories.LoanRepository;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ public class LoanController {
     /*
     curl -X POST localhost:8080/api/v1/loans
          -H 'Content-type:application/json'
-         -d '{"amount": "3250000", "motivation": "Vi vil kjøpe hus.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet"}'
+         -d '{"amount": "3250000", "motivation": "Vi vil kjøpe hus.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
      */
     @PostMapping
     Loan create(@RequestBody Loan newLoan) {
