@@ -1,5 +1,7 @@
 package com.brettkromkamp.loan.domains;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -18,6 +20,7 @@ public class Borrower implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "loan_id", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Loan loan;
 
     public Borrower() {
@@ -51,6 +54,14 @@ public class Borrower implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
 
     @Override
