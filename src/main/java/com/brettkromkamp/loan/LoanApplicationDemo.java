@@ -10,6 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Set;
+import java.util.prefs.BackingStoreException;
+
 @Configuration
 public class LoanApplicationDemo {
 
@@ -36,6 +39,10 @@ public class LoanApplicationDemo {
             System.out.println("----------------------------------------");
             for (Loan loan : loanRepository.findAll()) {
                 System.out.println(loan.toString());
+                Set<Borrower> borrowers = loan.getBorrowers();
+                for (Borrower borrower : borrowers) {
+                    System.out.println(borrower);
+                }
             }
             System.out.println();
 

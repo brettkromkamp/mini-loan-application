@@ -1,5 +1,7 @@
 package com.brettkromkamp.loan.domains;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -18,6 +20,7 @@ public class Loan implements Serializable {
     private int deductionFreePeriod;    // Avdragsfri periode
     private String type;                // Type
 
+    // Told Hibernate to initialise lazy state for outside transactions. Alternatively, could also set fet = FetchType.EAGER.
     @OneToMany(mappedBy = "loan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Borrower> borrowers;
 

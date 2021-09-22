@@ -1,1 +1,1 @@
-# mini-loan-application
+# Mini-loan Application
