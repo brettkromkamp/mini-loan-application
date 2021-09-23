@@ -3,6 +3,8 @@ package com.brettkromkamp.loan;
 import com.brettkromkamp.loan.domains.Borrower;
 import com.brettkromkamp.loan.domains.Loan;
 import com.brettkromkamp.loan.repositories.LoanRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -19,6 +21,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/api/v1/loans")
 public class LoanController {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoanController.class);
 
     // Repository will be injected into the controller by the constructor
     private final LoanRepository loanRepository;
@@ -48,6 +52,7 @@ public class LoanController {
      */
     @PostMapping
     ResponseEntity<?> create(@RequestBody Loan newLoan) {
+        logger.info("A request for a new loan has been made");
         EntityModel<Loan> entityModel = assembler.toModel(loanRepository.save(newLoan));
 
         return ResponseEntity
