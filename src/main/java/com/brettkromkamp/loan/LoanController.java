@@ -1,10 +1,20 @@
 package com.brettkromkamp.loan;
 
+import com.brettkromkamp.loan.domains.Borrower;
 import com.brettkromkamp.loan.domains.Loan;
 import com.brettkromkamp.loan.repositories.LoanRepository;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/api/v1/loans")
@@ -13,32 +23,44 @@ public class LoanController {
     // Repository will be injected into the controller by the constructor
     private final LoanRepository loanRepository;
 
-    LoanController(LoanRepository loanRepository) {
+    // Assembler will be injected in the constructor
+    private final LoanModelAssembler assembler;
+
+    LoanController(LoanRepository loanRepository, LoanModelAssembler assembler) {
         this.loanRepository = loanRepository;
+        this.assembler = assembler;
     }
 
-    // curl -v localhost:8080/api/v1/loans
+    // curl -v localhost:8080/api/v1/loans | json_pp
     @GetMapping
-    List<Loan> all() {
-        List<Loan> loans = loanRepository.findAll();
-        return loans;
+    CollectionModel<EntityModel<Loan>> list() {
+        List<EntityModel<Loan>> loans = loanRepository.findAll().stream()
+                .map(assembler::toModel)
+                .collect(Collectors.toList());
+        return CollectionModel.of(loans,
+                linkTo(methodOn(LoanController.class).list()).withSelfRel());
     }
 
     /*
-    curl -X POST localhost:8080/api/v1/loans
+    curl -v -X POST localhost:8080/api/v1/loans
          -H 'Content-type:application/json'
          -d '{"amount": "3250000", "motivation": "Vi vil kjøpe hus.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
      */
     @PostMapping
-    Loan create(@RequestBody Loan newLoan) {
-        return loanRepository.save(newLoan);
+    ResponseEntity<?> create(@RequestBody Loan newLoan) {
+        EntityModel<Loan> entityModel = assembler.toModel(loanRepository.save(newLoan));
+
+        return ResponseEntity
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                .body(entityModel);
     }
 
-    // curl -v localhost:8080/api/v1/loans/1
+    // curl -v localhost:8080/api/v1/loans/1 | json_pp
     @GetMapping("/{id}")
-    Loan read(@PathVariable Long id) {
-        return loanRepository.findById(id)
+    EntityModel<Loan> read(@PathVariable Long id) {
+        Loan loan = loanRepository.findById(id)
                 .orElseThrow(() -> new LoanNotFoundException(id));
+        return assembler.toModel(loan);
     }
 
     @PutMapping("/{id}")
@@ -58,9 +80,16 @@ public class LoanController {
                 });
     }
 
-    // curl -X DELETE localhost:8080/api/v1/loans/1
+    // curl -v -X DELETE localhost:8080/api/v1/loans/1 | json_pp
     @DeleteMapping("/{id}")
     void delete(@PathVariable Long id) {
         loanRepository.deleteById(id);
+    }
+
+    // curl -v -X GET localhost:8080/api/v1/loans/1/borrowers | json_pp
+    @GetMapping("/{id}/borrowers")
+    Set<Borrower> borrowers(@PathVariable Long id) {
+        Set<Borrower> borrowers = loanRepository.findById(id).get().getBorrowers();
+        return borrowers;
     }
 }
