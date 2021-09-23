@@ -24,12 +24,14 @@ public class LoanController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoanController.class);
 
-    // Repository will be injected into the controller by the constructor
     private final LoanRepository loanRepository;
 
-    // Assembler will be injected in the constructor
     private final LoanModelAssembler assembler;
 
+    /*
+    The loanRepository and assembler objects will be injected into the LoanController
+    by the constructor.
+     */
     LoanController(LoanRepository loanRepository, LoanModelAssembler assembler) {
         this.loanRepository = loanRepository;
         this.assembler = assembler;
@@ -48,11 +50,11 @@ public class LoanController {
     /*
     curl -v -X POST localhost:8080/api/v1/loans
          -H 'Content-type:application/json'
-         -d '{"amount": "3250000", "motivation": "Vi vil kjøpe hus.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
+         -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
      */
     @PostMapping
     ResponseEntity<?> create(@RequestBody Loan newLoan) {
-        logger.info("A request for a new loan has been made");
+        logger.info("A application for a new loan has been made.");
         EntityModel<Loan> entityModel = assembler.toModel(loanRepository.save(newLoan));
 
         return ResponseEntity

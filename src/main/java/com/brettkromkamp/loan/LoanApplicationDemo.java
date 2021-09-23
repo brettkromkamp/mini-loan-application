@@ -18,17 +18,15 @@ public class LoanApplicationDemo {
     @Bean
     public CommandLineRunner initialiseDatabase(LoanRepository loanRepository, BorrowerRepository borrowerRepository) {
         return args -> {
-            System.out.println("Starting...");
             // Create a new application for a loan
             Loan testLoan = new Loan(2_450_000.0f, "Vi skal låne penger til........", 300, 12, "annuitet");
 
-            System.out.println("Persisting loan to the repository");
+            logger.info("Persisting a test loan to the repository");
             loanRepository.save(testLoan);
 
-            System.out.println("Persisting borrowers to the repository");
+            logger.info("Persisting test borrowers to the repository");
             borrowerRepository.save(new Borrower("01056000069", "Kari Nordmann", testLoan));
             borrowerRepository.save(new Borrower("01056000301", "Ola Nordmann", testLoan));
-            System.out.println("Done!");
         };
     }
 }
