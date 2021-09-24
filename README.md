@@ -45,7 +45,13 @@ Pending
 ## OpenAPI Documentation
 Swagger-based OpenAPI documentation is available for the application, here: ```http://localhost:8080/swagger-ui.html```
 
+## Comments and Considerations
+- The Spring Boot service has been both implemented with and targetting Java 16. If this was a real production service, 
+I would have used a Java LTS release, currently either Java release 11 or &mdash;the very recently released&mdash; Java 
+Release 17.
+- Pending
+
 ## Relevant Resources
-- [What is HATEOAS?](https://dzone.com/articles/rest-api-what-is-hateoas).
-- [HAL - Hypertext Application Language](https://stateless.group/hal_specification.html). 
-- [Best Practices in API Design](https://swagger.io/resources/articles/best-practices-in-api-design/).
+- [What is HATEOAS?](https://dzone.com/articles/rest-api-what-is-hateoas)
+- [HAL - Hypertext Application Language](https://stateless.group/hal_specification.html)
+- [Best Practices in API Design](https://swagger.io/resources/articles/best-practices-in-api-design/)
