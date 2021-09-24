@@ -46,9 +46,9 @@ Pending
 Swagger-based OpenAPI documentation is available for the application, here: ```http://localhost:8080/swagger-ui.html```
 
 ## Comments and Considerations
-- The Spring Boot service has been both implemented with and targetting Java 16. If this was a real production service, 
-I would have used a Java LTS release, currently either Java release 11 or &mdash;the very recently released&mdash; Java 
-Release 17.
+- The application's Spring Boot service is targetting Java 16. If this was an actual production service, I would have used a 
+[Java LTS release](https://www.oracle.com/java/technologies/java-se-support-roadmap.html), currently either Java Release 11 
+or &mdash;the very recently released&mdash; Java Release 17.
 - Pending
 
 ## Relevant Resources
