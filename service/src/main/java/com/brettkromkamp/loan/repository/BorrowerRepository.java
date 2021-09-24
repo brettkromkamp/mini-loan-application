@@ -1,6 +1,6 @@
-package com.brettkromkamp.loan.repositories;
+package com.brettkromkamp.loan.repository;
 
-import com.brettkromkamp.loan.domains.Borrower;
+import com.brettkromkamp.loan.model.Borrower;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BorrowerRepository extends JpaRepository<Borrower, Long> {

@@ -1,10 +1,25 @@
-# Mini-Loan Application Service and Client Application
+# Mini-Loan Application Service and Client App
 
 ## Task Description
-### Part 1: RESTful Service
-Pending
 
-#### Loan Application Request
+The task is two-fold:
+1. Implement a [Spring Boot](https://spring.io/projects/spring-boot)-based backend web service to handle and store loan applications for would-be borrowers. 
+2. Implement a minimal [Angular](https://angular.io/) app which allows for creating a new loan application together with the ability to verify the presence of potentially already-submitted loan applications.
+
+### Part 1: RESTful Service &mdash; Requirements
+The service must make available, at least, the following two endpoints:
+1. A ```POST``` endpoint to process a loan application request capable of handling a JSON payload (provided below: Loan Application Request JSON Payload) containing the required information pertaining to the loan itself together with information in relation to the borrowers. A loan application can include one or more borrowers. The service must store the submitted loan applications for, at least, as long as the service is running.
+2. A ```GET``` endpoint that confirms either the presence or absence of a loan application by means of the provided identifier.
+
+In total, the service includes six endpoints (including the two required endpoints mentioned above):
+- ```GET /api/v1/loans/{id}``` (required)
+- ```PUT /api/v1/loans/{id}```
+- ```DELETE /api/v1/loans/{id}```
+- ```GET /api/v1/loans```
+- ```POST /api/v1/loans``` (required)
+- ```GET /api/v1/loans/{id}/borrowers```
+
+#### Loan Application Request JSON Payload
 
 ```json
 {
@@ -25,37 +40,46 @@ Pending
    "type":"annuitet"
 }
 ```
+#### Building and Running the Service (with Linux)
+Execute the following command in the Spring Boot service's top-level directory (that is, _service_):
 
-### Part 2: Angular Client Application
-Pending
-
-## Requirements
-Pending
-
-## Build and Run the Application
-Execute the following command in the Spring Boot service's top-level directory (_service_):
 ```./mvnw package``` 
 
 Run the following command after successfully executing the above command:
+
 ```java -jar target/loan-0.0.1-SNAPSHOT.jar```
 
-## Service Endpoints
-The service makes the following endpoints available:
-- GET /api/v1/loans/{id}
-- PUT /api/v1/loans/{id}
-- DELETE /api/v1/loans/{id}
-- GET /api/v1/loans
-- POST /api/v1/loans
-- GET /api/v1/loans/{id}/borrowers
-
-## OpenAPI Documentation
+#### OpenAPI Documentation
 Swagger-based OpenAPI documentation is available for the Spring Boot service, here: ```http://localhost:8080/swagger-ui.html```
 
-## Comments and Considerations
-- The application's Spring Boot service is implemented with Java 16 and targetting it, as well. If this was an actual production 
-service, I would have used a [Java LTS release](https://www.oracle.com/java/technologies/java-se-support-roadmap.html) instead &mdash; 
+#### Logging
+A loan application request is logged to the standard output (console) by the service.
+
+#### Additional Dependencies
+In addition to the required dependencies for the actual Spring Boot framework, the following dependencies (Maven coordinates) have been included:
+- ```org.springframework.boot:spring-boot-starter-hateoas```
+- ```org.springdoc:springdoc-openapi-ui:1.5.10```
+- ```com.h2database:h2```
+
+The ```spring-boot-starter-hateoas``` dependency was included to help with creating hypermedia-driven representations that follow the [HATEOAS](https://restcookbook.com/Basics/hateoas/) principle.
+
+The ```springdoc-openapi-ui``` dependency was added to automatically generate OpenAPI-based API documentation which can easily be visualized and interacted with by means of the [Swagger UI](https://swagger.io/tools/swagger-ui/).
+
+Finally, the ```h2``` dependency &mdash;an [in-memory database](https://www.h2database.com/html/main.html)&mdash; was added to allow for persistence of the service data while the service is running. 
+
+### Part 2: Angular Client App &mdash; Requirements
+Pending.
+
+## Miscellaneous Comments and Considerations
+- **Transaction management**: The aim of lazy loading is to save resources by not loading related objects into memory when the main object is loaded. Instead, the initialization of lazy entities is postponed until the moment they're needed. When retrieving lazily-loaded data, there are two steps in the process. First, there's populating the main object, and second, retrieving the data within its proxies. Loading data always requires an open *session* in [Hibernate](https://hibernate.org/). The problem arises when the second step happens after the transaction has closed, which leads to a ```LazyInitializationException```.
+    - Lazy loading with automatic transaction
+    - Lazy loading with a surrounding transaction 
+- The application's Spring Boot service is both implemented with Java 16 and targets Java 16, as well. If this was an actual production 
+service, it would have made more sense to use a [Java LTS release](https://www.oracle.com/java/technologies/java-se-support-roadmap.html) instead &mdash; 
 currently either Java 11 or, the very recently released, Java 17.
-- Pending
+- In relation to [GDPR](https://gdpr-info.eu/) considerations, personal data of the borrowers is not logged when receiving a loan application request.
+- For testing purposes, upon startup, the provided loan application is added to the service's repository.
+- The H2 database also provides the ability to access a database using a browser. If you started the server on the same computer as the browser, open the URL ```http://localhost:8082``` and provide the driver class of the database, the JDBC URL and user credentials to log in.
 
 ## Relevant Resources
 - [What is HATEOAS?](https://dzone.com/articles/rest-api-what-is-hateoas)

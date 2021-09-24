@@ -1,8 +1,9 @@
-package com.brettkromkamp.loan;
+package com.brettkromkamp.loan.controller;
 
-import com.brettkromkamp.loan.domains.Borrower;
-import com.brettkromkamp.loan.domains.Loan;
-import com.brettkromkamp.loan.repositories.LoanRepository;
+import com.brettkromkamp.loan.model.Borrower;
+import com.brettkromkamp.loan.model.Loan;
+import com.brettkromkamp.loan.repository.LoanRepository;
+import com.brettkromkamp.loan.service.serviceimpl.LoanServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.CollectionModel;
@@ -11,6 +12,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,18 +25,19 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class LoanController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoanController.class);
-
     private final LoanRepository loanRepository;
-
     private final LoanModelAssembler assembler;
+
+    private final LoanServiceImpl loanService;
 
     /*
     The loanRepository and assembler objects will be injected into the LoanController
     by the constructor.
      */
-    LoanController(LoanRepository loanRepository, LoanModelAssembler assembler) {
+    LoanController(LoanRepository loanRepository, LoanModelAssembler assembler, LoanServiceImpl loanService) {
         this.loanRepository = loanRepository;
         this.assembler = assembler;
+        this.loanService = loanService;
     }
 
     // curl -v localhost:8080/api/v1/loans | json_pp
@@ -55,7 +58,8 @@ public class LoanController {
      */
     @PostMapping
     ResponseEntity<?> create(@RequestBody Loan newLoan) {
-        logger.info("A application for a new loan has been made.");
+        logger.info(MessageFormat.format("An application for a new loan has been made. Amount: {0}, Duration: {1}, Type: {2}",
+                newLoan.getAmount(), newLoan.getDuration(), newLoan.getType()));
         EntityModel<Loan> entityModel = assembler.toModel(loanRepository.save(newLoan));
 
         return ResponseEntity
@@ -97,7 +101,7 @@ public class LoanController {
     // curl -v -X GET localhost:8080/api/v1/loans/1/borrowers | json_pp
     @GetMapping("/{id}/borrowers")
     Set<Borrower> borrowers(@PathVariable Long id) {
-        Set<Borrower> borrowers = loanRepository.findById(id).get().getBorrowers();
+        Set<Borrower> borrowers = loanService.getBorrowersByLoanId(id);
         return borrowers;
     }
 }

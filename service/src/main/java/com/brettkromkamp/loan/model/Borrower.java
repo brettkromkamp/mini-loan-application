@@ -1,4 +1,4 @@
-package com.brettkromkamp.loan.domains;
+package com.brettkromkamp.loan.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,6 +1,6 @@
-package com.brettkromkamp.loan;
+package com.brettkromkamp.loan.controller;
 
-import com.brettkromkamp.loan.domains.Loan;
+import com.brettkromkamp.loan.model.Loan;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;

@@ -1,19 +1,22 @@
 package com.brettkromkamp.loan;
 
-import com.brettkromkamp.loan.domains.Borrower;
-import com.brettkromkamp.loan.domains.Loan;
-import com.brettkromkamp.loan.repositories.BorrowerRepository;
-import com.brettkromkamp.loan.repositories.LoanRepository;
+import com.brettkromkamp.loan.model.Borrower;
+import com.brettkromkamp.loan.model.Loan;
+import com.brettkromkamp.loan.repository.BorrowerRepository;
+import com.brettkromkamp.loan.repository.LoanRepository;
+import com.brettkromkamp.loan.service.serviceimpl.LoanServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class LoanApplicationDemo {
+import java.util.Set;
 
-    private static final Logger logger = LoggerFactory.getLogger(LoanApplicationDemo.class);
+@Configuration
+public class RepositoryBootstrapper {
+
+    private static final Logger logger = LoggerFactory.getLogger(RepositoryBootstrapper.class);
 
     @Bean
     public CommandLineRunner initialiseDatabase(LoanRepository loanRepository, BorrowerRepository borrowerRepository) {

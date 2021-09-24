@@ -1,4 +1,4 @@
-package com.brettkromkamp.loan.domains;
+package com.brettkromkamp.loan.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

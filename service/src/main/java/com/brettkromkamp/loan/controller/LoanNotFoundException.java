@@ -1,4 +1,4 @@
-package com.brettkromkamp.loan;
+package com.brettkromkamp.loan.controller;
 
 public class LoanNotFoundException extends RuntimeException {
 
