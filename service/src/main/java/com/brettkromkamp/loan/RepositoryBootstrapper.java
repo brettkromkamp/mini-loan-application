@@ -4,14 +4,11 @@ import com.brettkromkamp.loan.model.Borrower;
 import com.brettkromkamp.loan.model.Loan;
 import com.brettkromkamp.loan.repository.BorrowerRepository;
 import com.brettkromkamp.loan.repository.LoanRepository;
-import com.brettkromkamp.loan.service.serviceimpl.LoanServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Set;
 
 @Configuration
 public class RepositoryBootstrapper {

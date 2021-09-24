@@ -1,12 +1,12 @@
-package com.brettkromkamp.loan.controller;
+package com.brettkromkamp.loan;
 
 public class LoanNotFoundException extends RuntimeException {
 
-    LoanNotFoundException() {
+    public LoanNotFoundException() {
         super();
     }
 
-    LoanNotFoundException(Long id) {
+    public LoanNotFoundException(Long id) {
         super("Could not find loan: " + id);
     }
 }

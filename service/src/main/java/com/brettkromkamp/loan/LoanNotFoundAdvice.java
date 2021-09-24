@@ -1,4 +1,4 @@
-package com.brettkromkamp.loan.controller;
+package com.brettkromkamp.loan;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

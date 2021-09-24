@@ -34,7 +34,6 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.5.10</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -51,6 +50,12 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+			<version>22.0.0</version>
+		</dependency>
     </dependencies>
 
 	<build>

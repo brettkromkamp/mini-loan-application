@@ -1,5 +1,6 @@
 package com.brettkromkamp.loan.controller;
 
+import com.brettkromkamp.loan.LoanNotFoundException;
 import com.brettkromkamp.loan.model.Borrower;
 import com.brettkromkamp.loan.model.Loan;
 import com.brettkromkamp.loan.repository.LoanRepository;
@@ -30,10 +31,6 @@ public class LoanController {
 
     private final LoanServiceImpl loanService;
 
-    /*
-    The loanRepository and assembler objects will be injected into the LoanController
-    by the constructor.
-     */
     LoanController(LoanRepository loanRepository, LoanModelAssembler assembler, LoanServiceImpl loanService) {
         this.loanRepository = loanRepository;
         this.assembler = assembler;
