@@ -51,6 +51,7 @@ public class LoanController {
     curl -v -X POST localhost:8080/api/v1/loans
          -H 'Content-type:application/json'
          -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
+         | json_pp
      */
     @PostMapping
     ResponseEntity<?> create(@RequestBody Loan newLoan) {

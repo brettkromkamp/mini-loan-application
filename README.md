@@ -33,22 +33,28 @@ Pending
 Pending
 
 ## Build and Run the Application
-In the project's top-level directory execute the following command:
+In the Spring Boot service's top-level directory (_service_) execute the following command:
 ```./mvnw package``` 
 
 After executing the above command, ```cd``` to the _target_ directory and run the following command:
 ```java -jar target/loan-0.0.1-SNAPSHOT.jar```
 
-## Calling Endpoints
-Pending
+## Service Endpoints
+The following service endpoints are available:
+- GET /api/v1/loans/{id}
+- PUT /api/v1/loans/{id}
+- DELETE /api/v1/loans/{id}
+- GET /api/v1/loans
+- POST /api/v1/loans
+- GET /api/v1/loans/{id}/borrowers
 
 ## OpenAPI Documentation
-Swagger-based OpenAPI documentation is available for the application, here: ```http://localhost:8080/swagger-ui.html```
+Swagger-based OpenAPI documentation is available for the Spring Boot service, here: ```http://localhost:8080/swagger-ui.html```
 
 ## Comments and Considerations
-- The application's Spring Boot service is targetting Java 16. If this was an actual production service, I would have used a 
-[Java LTS release](https://www.oracle.com/java/technologies/java-se-support-roadmap.html), currently either Java Release 11 
-or &mdash;the very recently released&mdash; Java Release 17.
+- The application's Spring Boot service is implemented with Java 16 and targetting it, as well. If this was an actual production 
+service, I would have used a [Java LTS release](https://www.oracle.com/java/technologies/java-se-support-roadmap.html) instead &mdash; 
+currently either Java 11 or, the very recently released, Java 17.
 - Pending
 
 ## Relevant Resources
