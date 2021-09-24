@@ -33,14 +33,14 @@ Pending
 Pending
 
 ## Build and Run the Application
-In the Spring Boot service's top-level directory (_service_) execute the following command:
+Execute the following command in the Spring Boot service's top-level directory (_service_):
 ```./mvnw package``` 
 
-After executing the above command, ```cd``` to the _target_ directory and run the following command:
+Run the following command after successfully executing the above command:
 ```java -jar target/loan-0.0.1-SNAPSHOT.jar```
 
 ## Service Endpoints
-The following service endpoints are available:
+The service makes the following endpoints available:
 - GET /api/v1/loans/{id}
 - PUT /api/v1/loans/{id}
 - DELETE /api/v1/loans/{id}
