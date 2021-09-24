@@ -68,7 +68,7 @@ The ```springdoc-openapi-ui``` dependency was added to automatically generate Op
 
 The ```h2``` dependency &mdash;an [in-memory database](https://www.h2database.com/html/main.html)&mdash; was added to allow for the persistence of the loan applications while the service is running. 
 
-Finally, the ```annotations``` dependency has been included so that IntelliJ IDEA integrated development environment will generate appropriate warnings if *null* checks are missing.
+Finally, the ```annotations``` dependency has been included so that the integrated development environment (that is, [IntelliJ IDEA](https://www.jetbrains.com/idea/)) will generate appropriate warnings if *null* checks are missing.
 
 ### Part 2: Angular Client App &mdash; Requirements
 Pending.
