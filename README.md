@@ -79,7 +79,7 @@ service, it would have made more sense to use a [Java LTS release](https://www.o
 currently either Java 11 or, the very recently released, Java 17.
 - In relation to [GDPR](https://gdpr-info.eu/) considerations, personal data of the borrowers is not logged when receiving a loan application request.
 - For testing purposes, upon startup, the provided loan application is added to the service's repository.
-- The H2 database also provides the ability to access a database using a browser. If you started the server on the same computer as the browser, open the URL ```http://localhost:8082``` and provide the driver class of the database, the JDBC URL and user credentials to log in.
+- The H2 database also provides the ability to access a database using a browser. If you started the server on the same computer as the browser, open the URL ```http://localhost:8080/h2``` and provide the driver class of the database, the JDBC URL and user credentials to log in.
 
 ## Relevant Resources
 - [What is HATEOAS?](https://dzone.com/articles/rest-api-what-is-hateoas)
