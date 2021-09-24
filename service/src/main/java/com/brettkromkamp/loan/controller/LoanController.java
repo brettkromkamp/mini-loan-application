@@ -5,8 +5,10 @@ import com.brettkromkamp.loan.model.Borrower;
 import com.brettkromkamp.loan.model.Loan;
 import com.brettkromkamp.loan.repository.LoanRepository;
 import com.brettkromkamp.loan.service.serviceimpl.LoanServiceImpl;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -54,7 +56,7 @@ public class LoanController {
          | json_pp
      */
     @PostMapping
-    ResponseEntity<?> create(@RequestBody Loan newLoan) {
+    ResponseEntity<?> create(@RequestBody @NotNull Loan newLoan) {
         logger.info(MessageFormat.format("An application for a new loan has been made. Amount: {0}, Duration: {1}, Type: {2}",
                 newLoan.getAmount(), newLoan.getDuration(), newLoan.getType()));
         EntityModel<Loan> entityModel = assembler.toModel(loanRepository.save(newLoan));
@@ -73,7 +75,7 @@ public class LoanController {
     }
 
     @PutMapping("/{id}")
-    Loan update(@RequestBody Loan newLoan, @PathVariable Long id) {
+    Loan update(@RequestBody @NotNull Loan newLoan, @PathVariable Long id) {
         return loanRepository.findById(id)
                 .map(loan -> {
                     loan.setAmount(newLoan.getAmount());
@@ -92,7 +94,11 @@ public class LoanController {
     // curl -v -X DELETE localhost:8080/api/v1/loans/1 | json_pp
     @DeleteMapping("/{id}")
     void delete(@PathVariable Long id) {
-        loanRepository.deleteById(id);
+        try {
+            loanRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new LoanNotFoundException(id);
+        }
     }
 
     // curl -v -X GET localhost:8080/api/v1/loans/1/borrowers | json_pp
