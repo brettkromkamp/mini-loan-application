@@ -3,6 +3,7 @@ package com.brettkromkamp.loan.service.serviceimpl;
 import com.brettkromkamp.loan.LoanNotFoundException;
 import com.brettkromkamp.loan.model.Borrower;
 import com.brettkromkamp.loan.model.Loan;
+import com.brettkromkamp.loan.model.LoanStatus;
 import com.brettkromkamp.loan.repository.LoanRepository;
 import com.brettkromkamp.loan.service.LoanService;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,15 @@ public class LoanServiceImpl implements LoanService {
             throw new LoanNotFoundException(id);
         }
 
+    }
+
+    @Override
+    public void setStatus(Long id, LoanStatus status) {
+        Optional<Loan> loan = loanRepository.findById(id);
+
+        if (loan.isPresent()) {
+            loan.get().setStatus(status);
+            loanRepository.save(loan.get()); // TODO: Confirm if this is the correct way of doing things
+        }
     }
 }

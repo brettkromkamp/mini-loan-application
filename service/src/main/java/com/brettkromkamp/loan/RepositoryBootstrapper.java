@@ -2,6 +2,8 @@ package com.brettkromkamp.loan;
 
 import com.brettkromkamp.loan.model.Borrower;
 import com.brettkromkamp.loan.model.Loan;
+import com.brettkromkamp.loan.model.LoanStatus;
+import com.brettkromkamp.loan.model.LoanType;
 import com.brettkromkamp.loan.repository.BorrowerRepository;
 import com.brettkromkamp.loan.repository.LoanRepository;
 import org.slf4j.Logger;
@@ -19,7 +21,7 @@ public class RepositoryBootstrapper {
     public CommandLineRunner initialiseDatabase(LoanRepository loanRepository, BorrowerRepository borrowerRepository) {
         return args -> {
             // Create a new application for a loan
-            Loan testLoan = new Loan(2_450_000.0f, "Vi skal låne penger til........", 300, 12, "annuitet");
+            Loan testLoan = new Loan(2_450_000.0f, "Vi skal låne penger til........", 300, 12, LoanType.ANNUITY, LoanStatus.PENDING);
 
             logger.info("Persisting a test loan to the repository");
             loanRepository.save(testLoan);

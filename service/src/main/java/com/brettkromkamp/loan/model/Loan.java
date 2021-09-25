@@ -17,7 +17,9 @@ public class Loan implements Serializable {
     private String motivation;          // Behov
     private int duration;               // Lopetid
     private int deductionFreePeriod;    // Avdragsfri periode
-    private String type;                // Type
+    private LoanType type;              // Type
+
+    private LoanStatus status;
 
     @OneToMany(mappedBy = "loan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Borrower> borrowers = new HashSet<>();
@@ -26,12 +28,13 @@ public class Loan implements Serializable {
 
     }
 
-    public Loan(float amount, String motivation, int duration, int deductionFreePeriod, String type) {
+    public Loan(float amount, String motivation, int duration, int deductionFreePeriod, LoanType type, LoanStatus status) {
         this.amount = amount;
         this.motivation = motivation;
         this.duration = duration;
         this.deductionFreePeriod = deductionFreePeriod;
         this.type = type;
+        this.status = status;
     }
 
     public Long getId() {
@@ -74,12 +77,20 @@ public class Loan implements Serializable {
         this.deductionFreePeriod = deductionFreePeriod;
     }
 
-    public String getType() {
+    public LoanType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(LoanType type) {
         this.type = type;
+    }
+
+    public LoanStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(LoanStatus status) {
+        this.status = status;
     }
 
     public Set<Borrower> getBorrowers() {

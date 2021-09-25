@@ -50,9 +50,9 @@ public class LoanController {
     }
 
     /*
-    curl -v -X POST localhost:8080/api/v1/loans
-         -H 'Content-type:application/json'
-         -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
+        curl -v -X POST localhost:8080/api/v1/loans
+             -H 'Content-type:application/json'
+             -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
      */
     @PostMapping
     ResponseEntity<?> create(@RequestBody @NotNull Loan newLoan) {
@@ -73,6 +73,11 @@ public class LoanController {
         return assembler.toModel(loan);
     }
 
+    /*
+        curl -v -X PUT localhost:8080/api/v1/loans/2
+             -H 'Content-type:application/json'
+             -d '{"amount": "3250000", "motivation": "Vi vil kjøpe hus.", "duration": "240", "deductionFreePeriod": "12", "type": "ANNUITY", "status": "APPROVED", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
+     */
     @PutMapping("/{id}")
     Loan update(@RequestBody @NotNull Loan newLoan, @PathVariable Long id) {
         return loanRepository.findById(id)
@@ -82,6 +87,7 @@ public class LoanController {
                     loan.setDuration(newLoan.getDuration());
                     loan.setDeductionFreePeriod(newLoan.getDeductionFreePeriod());
                     loan.setType(newLoan.getType());
+                    loan.setStatus(newLoan.getStatus());
                     return loanRepository.save(loan);
                 })
                 .orElseGet(() -> {
