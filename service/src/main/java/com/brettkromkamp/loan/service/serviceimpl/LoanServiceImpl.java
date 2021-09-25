@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-@Transactional
 public class LoanServiceImpl implements LoanService {
 
     private final LoanRepository loanRepository;
@@ -23,6 +22,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
+    @Transactional
     public Set<Borrower> getBorrowersByLoanId(Long id) {
         Optional<Loan> loan = loanRepository.findById(id);
 

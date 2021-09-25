@@ -66,7 +66,7 @@ curl -v -X POST localhost:8080/api/v1/loans
 Execute the following command to retrieve the borrowers for a specific loan application:
 
 ```bash
-curl -v -X GET localhost:8080/api/v1/loans/1/borrowers
+curl -v localhost:8080/api/v1/loans/1/borrowers
 ```
 
 #### Building and Running the Service (with Linux)
@@ -107,16 +107,16 @@ The `h2` dependency &mdash;an [in-memory database](https://www.h2database.com/ht
 Finally, the `annotations` dependency has been included so that the integrated development environment (that is, [IntelliJ IDEA](https://www.jetbrains.com/idea/)) will generate appropriate warnings if *null* checks are missing.
 
 ### Part 2: Angular Client App &mdash; Requirements
-	Pending.
+Pending.
 
 ## Miscellaneous Comments and Considerations
 - **Transaction management**: The aim of lazy loading is to save resources by not loading related objects into memory when the main object is loaded. Instead, the initialization of lazy entities is postponed until the moment they're needed. When retrieving lazily-loaded data, there are two steps in the process. First, there's populating the main object, and second, retrieving the data within its proxies. Loading data always requires an open *session* in [Hibernate](https://hibernate.org/). The problem arises when the second step happens after the transaction has closed, which leads to a `LazyInitializationException`.
-    - Lazy loading with automatic transactions with the `spring.jpa.properties.hibernate.enable_lazy_load_no_trans` property. Turning this on means that **each fetch of a lazy entity will open a temporary session and run inside a separate transaction** probably resulting in the [N + 1 issue](https://vladmihalcea.com/n-plus-1-query-problem/).
-    - Lazy loading with a surrounding transaction 
+    - Lazy loading with automatic transactions with the `spring.jpa.properties.hibernate.enable_lazy_load_no_trans` property: Turning this on means that **each fetch of a lazy entity will open a temporary session and run inside a separate transaction** probably resulting in the [N + 1 issue](https://vladmihalcea.com/n-plus-1-query-problem/).
+    - Lazy loading with a surrounding transaction: In this case, this is the approach that has been taken. 
 - The application's service is both implemented with Java 16 and targets Java 16, as well. If this was an actual production 
 service, it would have made more sense to use a [Java LTS release](https://www.oracle.com/java/technologies/java-se-support-roadmap.html) instead &mdash; 
 currently either Java 11 or, the very recently released, Java 17.
-- In relation to [GDPR](https://gdpr-info.eu/) considerations, personal data of the borrowers is not logged when receiving a loan application request.
+- In relation to [GDPR](https://gdpr-info.eu/) considerations, personal data of the borrowers is not logged when receiving a loan application request. An alternative approach to removing the personal data would be to anonymize it.
 - For testing purposes, upon startup, the provided loan application is added to the service's repository.
 - The H2 database also provides the ability to access a database using a browser. If you started the server on the same computer as the browser, open the URL `http://localhost:8080/h2` and provide the driver class of the database, the JDBC URL and user credentials to log in.
 
