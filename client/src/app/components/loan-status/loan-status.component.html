@@ -1,5 +1,6 @@
 <div class="list row">
     <div class="col-md-8">
+        <h1>Check Status</h1>
         <div class="input-group mb-4">
             <input type="text" class="form-control" placeholder="Search by identifier" [(ngModel)]="loanIdentifier" />
             <div class="input-group-append">
@@ -10,15 +11,16 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div *ngIf="currentLoan">
+        <div *ngIf="currentLoan; else noLoan">
             <h4>Loan</h4>
             <div>
-                <label><strong>Identifier:</strong></label>
+                <label><strong>Status:</strong> {{loanStatus}}</label>
             </div>
         </div>
-        <div *ngIf="!currentLoan">
-            <br />
-            <p>Please search for a loan application!</p>
-        </div>
+        <ng-template #noLoan>
+            <div>
+                <p>Please search for a loan application!</p>
+            </div>
+        </ng-template>
     </div>
 </div>
