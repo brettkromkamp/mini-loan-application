@@ -6,13 +6,15 @@ The task is two-fold:
 1. Implement a [Spring Boot](https://spring.io/projects/spring-boot)-based backend web service to handle and store loan applications for would-be borrowers. 
 2. Implement a minimal [Angular](https://angular.io/) app which allows for the creation of a new loan application together with the ability to verify the presence of potentially already-submitted loan applications.
 
+> Side note: For the sake of consistency, English is being used throughout the project (including class names, variable names and JSON keys).
+
 ### Part 1: RESTful Service &mdash; Requirements
 The service must make available, at least, the following two endpoints:
 1. A ```POST``` endpoint to process a loan application request capable of handling a JSON payload (provided below: [Loan Application Request JSON Payload](#loan-application-request-json-payload)) containing the required information pertaining to the loan itself together with information in relation to the borrowers. A loan application can include one or more borrowers. The service must store the submitted loan applications for, at least, as long as the service is running. Finally, the endpoint should return a response that includes the identifier of the newly created loan application.
-2. A ```GET``` endpoint that confirms either the presence or absence of a loan application by means of the provided identifier.
+2. A ```GET``` endpoint that retrieves a loan application including its status (that is, `Pending`, `Denied` or `Approved`).
 
 In total, the service includes six endpoints (including the two required endpoints mentioned above):
-- `GET /api/v1/loans/{id}` (**required**): Retrieves a specific loan application by identifier. If a loan application with the specified identifier does not exist, a 404 (Not Found) HTTP status code is returned.
+- `GET /api/v1/loans/{id}` (**required**): Retrieves a specific loan application by identifier including its status. If a loan application with the specified identifier does not exist, a 404 (Not Found) HTTP status code is returned.
 - `PUT /api/v1/loans/{id}`: Updates a specific loan application by passing in a loan application (JSON) payload and the accompanying identifier.
 - `DELETE /api/v1/loans/{id}`: Deletes a specific loan application by identifier. If a loan application with the specified identifier does not exist, a 404 (Not Found) HTTP status code is returned.
 - `GET /api/v1/loans`: Retrieves all of the submitted loan applications.
@@ -37,7 +39,7 @@ In total, the service includes six endpoints (including the two required endpoin
    "motivation":"Vi skal låne penger til........",
    "duration":300,
    "deductionFreePeriod":12,
-   "type":"annuitet"
+   "type":"annuity"
 }
 ```
 
@@ -60,7 +62,7 @@ Execute the following command to create a new loan application
 ```bash
 curl -v -X POST localhost:8080/api/v1/loans
          -H 'Content-type:application/json'
-         -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
+         -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "annuity", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
 ```
 
 Execute the following command to retrieve the borrowers for a specific loan application:
@@ -117,7 +119,7 @@ Pending.
 service, it would have made more sense to use a [Java LTS release](https://www.oracle.com/java/technologies/java-se-support-roadmap.html) instead &mdash; 
 currently either Java 11 or, the very recently released, Java 17.
 - In relation to [GDPR](https://gdpr-info.eu/) considerations, personal data of the borrowers is not logged when receiving a loan application request. An alternative approach to removing the personal data would be to anonymize it.
-- For testing purposes, upon startup, the provided loan application is added to the service's repository.
+- For testing purposes, upon startup, an example loan application is added to the service's repository.
 - The H2 database also provides the ability to access a database using a browser. If you started the server on the same computer as the browser, open the URL `http://localhost:8080/h2` and provide the driver class of the database, the JDBC URL and user credentials to log in.
 
 ## Relevant Resources
