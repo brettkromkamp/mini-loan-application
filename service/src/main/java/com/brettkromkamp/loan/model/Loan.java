@@ -28,6 +28,10 @@ public class Loan implements Serializable {
 
     }
 
+    public Loan(float amount, String motivation, int duration, int deductionFreePeriod) {
+        this(amount, motivation, duration, deductionFreePeriod, LoanType.ANNUITY);
+    }
+
     public Loan(float amount, String motivation, int duration, int deductionFreePeriod, LoanType type) {
         this(amount, motivation, duration, deductionFreePeriod, type, LoanStatus.PENDING);
     }

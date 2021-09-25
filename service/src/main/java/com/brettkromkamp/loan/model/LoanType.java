@@ -10,6 +10,8 @@ package com.brettkromkamp.loan.model;
     payments constitute a larger share of the total amount.
  */
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum LoanType {
     ANNUITY("annuity"),
     SERIAL("serial");
@@ -21,6 +23,7 @@ public enum LoanType {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return name;
     }

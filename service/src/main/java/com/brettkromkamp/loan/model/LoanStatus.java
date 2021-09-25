@@ -1,5 +1,7 @@
 package com.brettkromkamp.loan.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum LoanStatus {
     PENDING("Pending"),
     DENIED("Denied"),
@@ -12,6 +14,7 @@ public enum LoanStatus {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return name;
     }
