@@ -2,8 +2,6 @@ package com.brettkromkamp.loan;
 
 import com.brettkromkamp.loan.model.Borrower;
 import com.brettkromkamp.loan.model.Loan;
-import com.brettkromkamp.loan.model.LoanStatus;
-import com.brettkromkamp.loan.model.LoanType;
 import com.brettkromkamp.loan.repository.BorrowerRepository;
 import com.brettkromkamp.loan.repository.LoanRepository;
 import org.slf4j.Logger;
