@@ -3,18 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { LoanCreateComponent } from './components/loan-create/loan-create.component';
 import { LoanStatusComponent } from './components/loan-status/loan-status.component';
+import { HomeComponent } from './components/home/home.component';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoanCreateComponent,
-    LoanStatusComponent
+    LoanStatusComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
