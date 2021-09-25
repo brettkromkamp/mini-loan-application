@@ -39,7 +39,7 @@ public class LoanController {
         this.loanService = loanService;
     }
 
-    // curl -v localhost:8080/api/v1/loans | json_pp
+    // curl -v localhost:8080/api/v1/loans
     @GetMapping
     CollectionModel<EntityModel<Loan>> list() {
         List<EntityModel<Loan>> loans = loanRepository.findAll().stream()
@@ -53,7 +53,6 @@ public class LoanController {
     curl -v -X POST localhost:8080/api/v1/loans
          -H 'Content-type:application/json'
          -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
-         | json_pp
      */
     @PostMapping
     ResponseEntity<?> create(@RequestBody @NotNull Loan newLoan) {
@@ -66,7 +65,7 @@ public class LoanController {
                 .body(entityModel);
     }
 
-    // curl -v localhost:8080/api/v1/loans/1 | json_pp
+    // curl -v localhost:8080/api/v1/loans/1
     @GetMapping("/{id}")
     EntityModel<Loan> read(@PathVariable Long id) {
         Loan loan = loanRepository.findById(id)
@@ -91,7 +90,7 @@ public class LoanController {
                 });
     }
 
-    // curl -v -X DELETE localhost:8080/api/v1/loans/1 | json_pp
+    // curl -v -X DELETE localhost:8080/api/v1/loans/1
     @DeleteMapping("/{id}")
     void delete(@PathVariable Long id) {
         try {
@@ -101,7 +100,7 @@ public class LoanController {
         }
     }
 
-    // curl -v -X GET localhost:8080/api/v1/loans/1/borrowers | json_pp
+    // curl -v -X GET localhost:8080/api/v1/loans/1/borrowers
     @GetMapping("/{id}/borrowers")
     Set<Borrower> borrowers(@PathVariable Long id) {
         Set<Borrower> borrowers = loanService.getBorrowersByLoanId(id);
