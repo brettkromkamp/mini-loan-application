@@ -1,1 +1,24 @@
-<p>loan-status works!</p>
+<div class="list row">
+    <div class="col-md-8">
+        <div class="input-group mb-4">
+            <input type="text" class="form-control" placeholder="Search by identifier" [(ngModel)]="loanIdentifier" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="searchByIdentifier()">
+                    Search
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="currentLoan">
+            <h4>Loan</h4>
+            <div>
+                <label><strong>Identifier:</strong></label>
+            </div>
+        </div>
+        <div *ngIf="!currentLoan">
+            <br />
+            <p>Please search for a loan application!</p>
+        </div>
+    </div>
+</div>
