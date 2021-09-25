@@ -21,7 +21,7 @@ public class RepositoryBootstrapper {
     public CommandLineRunner initialiseDatabase(LoanRepository loanRepository, BorrowerRepository borrowerRepository) {
         return args -> {
             // Create a new application for a loan
-            Loan testLoan = new Loan(2_450_000.0f, "Vi skal låne penger til........", 300, 12, LoanType.ANNUITY, LoanStatus.PENDING);
+            Loan testLoan = new Loan(2_450_000.0f, "Vi skal låne penger til........", 300, 12, LoanType.ANNUITY);
 
             logger.info("Persisting a test loan to the repository");
             loanRepository.save(testLoan);

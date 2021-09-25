@@ -3,6 +3,7 @@ package com.brettkromkamp.loan.controller;
 import com.brettkromkamp.loan.LoanNotFoundException;
 import com.brettkromkamp.loan.model.Borrower;
 import com.brettkromkamp.loan.model.Loan;
+import com.brettkromkamp.loan.model.LoanStatus;
 import com.brettkromkamp.loan.repository.LoanRepository;
 import com.brettkromkamp.loan.service.serviceimpl.LoanServiceImpl;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -52,12 +55,15 @@ public class LoanController {
     /*
         curl -v -X POST localhost:8080/api/v1/loans
              -H 'Content-type:application/json'
-             -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "annuitet", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
+             -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "ANNUITY", "status": "PENDING", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
      */
     @PostMapping
     ResponseEntity<?> create(@RequestBody @NotNull Loan newLoan) {
         logger.info(MessageFormat.format("An application for a new loan has been made. Amount: {0}, Duration: {1}, Type: {2}",
                 newLoan.getAmount(), newLoan.getDuration(), newLoan.getType()));
+        if (newLoan.getStatus() == null) {
+            newLoan.setStatus(LoanStatus.PENDING);
+        }
         EntityModel<Loan> entityModel = assembler.toModel(loanRepository.save(newLoan));
 
         return ResponseEntity
@@ -76,7 +82,7 @@ public class LoanController {
     /*
         curl -v -X PUT localhost:8080/api/v1/loans/2
              -H 'Content-type:application/json'
-             -d '{"amount": "3250000", "motivation": "Vi vil kjøpe hus.", "duration": "240", "deductionFreePeriod": "12", "type": "ANNUITY", "status": "APPROVED", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
+             -d '{"amount": "3250000", "motivation": "Vi ønsker å kjøpe drømmehuset vårt.", "duration": "240", "deductionFreePeriod": "12", "type": "ANNUITY", "status": "APPROVED", "borrowers": [{"name": "Cecilie Johansen", "socialSecurityNumber": "01056000307"}, {"name": "Tommy Johansen", "socialSecurityNumber": "01056000311"}]}'
      */
     @PutMapping("/{id}")
     Loan update(@RequestBody @NotNull Loan newLoan, @PathVariable Long id) {
@@ -106,10 +112,23 @@ public class LoanController {
         }
     }
 
-    // curl -v -X GET localhost:8080/api/v1/loans/1/borrowers
+    // curl -v localhost:8080/api/v1/loans/1/borrowers
     @GetMapping("/{id}/borrowers")
     Set<Borrower> borrowers(@PathVariable Long id) {
         Set<Borrower> borrowers = loanService.getBorrowersByLoanId(id);
         return borrowers;
     }
+
+    /*
+    // curl -v localhost:8080/api/v1/loans/1/status
+    @GetMapping("/{id}/status")
+    Map<String, String> getStatus(@PathVariable Long id) {
+        Loan loan = loanRepository.findById(id)
+                .orElseThrow(() -> new LoanNotFoundException(id));
+        Map<String, String> map = new HashMap<>();
+        map.put("identifier", loan.getId().toString());
+        map.put("status", loan.getStatus().name());
+        return map;
+    }
+     */
 }

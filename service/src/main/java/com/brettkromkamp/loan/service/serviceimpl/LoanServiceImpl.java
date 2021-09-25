@@ -41,7 +41,7 @@ public class LoanServiceImpl implements LoanService {
 
         if (loan.isPresent()) {
             loan.get().setStatus(status);
-            loanRepository.save(loan.get()); // TODO: Confirm if this is the correct way of doing things
+            loanRepository.save(loan.get()); // Is this okay?
         }
     }
 }

@@ -11,6 +11,17 @@ package com.brettkromkamp.loan.model;
  */
 
 public enum LoanType {
-    ANNUITY,
-    SERIAL
+    ANNUITY("annuity"),
+    SERIAL("serial");
+
+    private final String name;
+
+    private LoanType(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
