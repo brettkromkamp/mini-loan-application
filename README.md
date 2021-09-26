@@ -4,7 +4,7 @@
 
 The task is two-fold:
 1. Implement a [Spring Boot](https://spring.io/projects/spring-boot)-based backend web service to handle and store loan applications for would-be borrowers. 
-2. Implement a minimal [Angular](https://angular.io/) app which allows for the creation of a new loan application together with the ability to check the status of already-submitted loan applications.
+2. Implement a minimal [Angular](https://angular.io/) app which allows for the creation of new loan applications together with the ability to check the status of already-submitted loan applications.
 
 > Side note: For the sake of consistency, English is being used throughout the project (including documentation, source code and JSON keys).
 
