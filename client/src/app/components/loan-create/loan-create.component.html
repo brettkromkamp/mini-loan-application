@@ -3,26 +3,58 @@
         <h1>Submit Application</h1>
         <div class="submit-form">
             <div *ngIf="!submitted">
+                <h4>Loan Details</h4>
                 <div class="form-group">
                     <label for="name">Amount</label>
-                    <input type="text" class="form-control" id="amount" required [(ngModel)]="loan.amount"
-                        name="amount" />
+                    <input type="text" class="form-control" id="amount" required [(ngModel)]="loan.amount" name="amount"
+                        placeholder="Amount" autofocus />
                 </div>
                 <div class="form-group">
                     <label for="motivation">Motivation</label>
-                    <input class="form-control" id="motivation" required [(ngModel)]="loan.motivation"
-                        name="motivation" />
+                    <input class="form-control" id="motivation" required [(ngModel)]="loan.motivation" name="motivation"
+                        placeholder="Motivation" />
                 </div>
                 <div class="form-group">
                     <label for="duration">Duration</label>
-                    <input class="form-control" id="duration" required [(ngModel)]="loan.duration" name="duration" />
+                    <input class="form-control" id="duration" required [(ngModel)]="loan.duration" name="duration"
+                        placeholder="Duration" />
                 </div>
                 <div class="form-group">
                     <label for="deductionFreePeriod">Deduction-free period</label>
                     <input class="form-control" id="deductionFreePeriod" required [(ngModel)]="loan.deductionFreePeriod"
-                        name="deductionFreePeriod" />
+                        name="deductionFreePeriod" placeholder="Deduction free period" />
                 </div>
+                <br />
                 <!-- Borrowers -->
+                <h4>Personal Information</h4>
+                <div class="form-group">
+                    <label>Person 1</label>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" required [(ngModel)]="loan.borrowers[0].name"
+                                id="namePerson1" name="namePerson1" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" required
+                                [(ngModel)]="loan.borrowers[0].socialSecurityNumber" id="ssnPerson1" name="ssnPerson1"
+                                placeholder="Social security number">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Person 2</label>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" required [(ngModel)]="loan.borrowers[1].name"
+                                id="namePerson2" name="namePerson2" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" required
+                                [(ngModel)]="loan.borrowers[1].socialSecurityNumber" id="ssnPerson2" name="ssnPerson2"
+                                placeholder="Social security number">
+                        </div>
+                    </div>
+                </div>
                 <!-- Borrowers -->
                 <button (click)="createLoan()" class="btn btn-success">Create loan</button>
             </div>

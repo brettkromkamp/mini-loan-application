@@ -3,3 +3,14 @@
 body {
     font-family: 'Nunito', sans-serif;
 }
+
+.loan-app-image {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+  }
