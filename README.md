@@ -91,7 +91,9 @@ Swagger-based OpenAPI documentation is available for the Spring Boot service, he
 A loan application request is logged to the standard output (console) by the service.
 
 #### The Service Layer and Business Logic
-In a layered architecture, the [service layer](https://martinfowler.com/eaaCatalog/serviceLayer.html) is responsible for representing concepts of the business, information about the business situation, and business rules. State that reflects the business situation is controlled and used here, even though the technical details of storing it are delegated to the infrastructure. This layer is the heart of business software.
+In a layered architecture, the [service layer](https://martinfowler.com/eaaCatalog/serviceLayer.html) is responsible for representing concepts of the business, information about the business situation, and business rules. State that reflects the business situation is controlled and used here, even though the technical details of storing it are delegated to the infrastructure. 
+
+In the context of the loan application service, the service layer is where the submitted loan applications can be validated, verified and further processed &mdash;in conjunction with other services&mdash; until completion.
 
 #### Additional Dependencies
 In addition to the required dependencies for the actual Spring Boot framework, the following dependencies (Maven coordinates) have been included:
