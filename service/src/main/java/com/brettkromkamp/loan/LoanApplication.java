@@ -21,6 +21,7 @@ public class LoanApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/v1/loans/{id}").allowedOrigins("http://localhost:" + FRONTEND_APP_PORT);
+                registry.addMapping("/api/v1/loans").allowedOrigins("http://localhost:" + FRONTEND_APP_PORT);
             }
         };
     }

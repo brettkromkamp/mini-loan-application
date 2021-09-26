@@ -1,5 +1,36 @@
 <div class="list row">
     <div class="col-md-8">
         <h1>Submit Application</h1>
+        <div class="submit-form">
+            <div *ngIf="!submitted">
+                <div class="form-group">
+                    <label for="name">Amount</label>
+                    <input type="text" class="form-control" id="amount" required [(ngModel)]="loan.amount"
+                        name="amount" />
+                </div>
+                <div class="form-group">
+                    <label for="motivation">Motivation</label>
+                    <input class="form-control" id="motivation" required [(ngModel)]="loan.motivation"
+                        name="motivation" />
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <input class="form-control" id="duration" required [(ngModel)]="loan.duration" name="duration" />
+                </div>
+                <div class="form-group">
+                    <label for="deductionFreePeriod">Deduction-free period</label>
+                    <input class="form-control" id="deductionFreePeriod" required [(ngModel)]="loan.deductionFreePeriod"
+                        name="deductionFreePeriod" />
+                </div>
+                <!-- Borrowers -->
+                <!-- Borrowers -->
+                <button (click)="createLoan()" class="btn btn-success">Create loan</button>
+            </div>
+
+            <div *ngIf="submitted">
+                <div class="alert alert-success" role="alert">You successfully created a loan!</div>
+                <button class="btn btn-success" (click)="newLoan()">New loan</button>
+            </div>
+        </div>
     </div>
 </div>
