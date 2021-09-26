@@ -72,7 +72,7 @@ curl -v localhost:8080/api/v1/loans/1/borrowers
 ```
 
 #### Building and Running the Service (with Linux)
-Execute the following command in the Spring Boot service's top-level directory (that is, _service_):
+Execute the following command in the Spring Boot service's top-level directory (that is, `service`):
 
 ```bash
 ./mvnw package
@@ -91,7 +91,7 @@ Swagger-based OpenAPI documentation is available for the Spring Boot service, he
 A loan application request is logged to the standard output (console) by the service.
 
 #### The Service Layer and Business Logic
-Pending.
+In a layered architecture, the [service layer](https://martinfowler.com/eaaCatalog/serviceLayer.html) is responsible for representing concepts of the business, information about the business situation, and business rules. State that reflects the business situation is controlled and used here, even though the technical details of storing it are delegated to the infrastructure. This layer is the heart of business software.
 
 #### Additional Dependencies
 In addition to the required dependencies for the actual Spring Boot framework, the following dependencies (Maven coordinates) have been included:
@@ -109,20 +109,8 @@ The `h2` dependency &mdash;an [in-memory database](https://www.h2database.com/ht
 Finally, the `annotations` dependency has been included so that the integrated development environment (that is, [IntelliJ IDEA](https://www.jetbrains.com/idea/)) will generate appropriate warnings if *null* checks are missing.
 
 ### Part 2: Angular Client App &mdash; Requirements
-The Angular app includes functionality to submit new loan applications together with the ability to check the status of already submitted loan applications. 
+The Angular app includes functionality to submit new loan applications together with the ability to check the status &mdash;that is, `Pending`, `Denied` or `Approved`&mdash; of already submitted loan applications. Screen shots of the app are available in the repository's `images` directory.
 
-<img style="border: 1px solid #666;" src="./images/app-home.png" width="480" alt="App's home screen">
-
-*Image: App's home screen*
-
-<img style="border: 1px solid #666;" src="./images/app-check-status.png" width="480" alt="App's check loan application status screen">
-
-*Image: App's check loan application status screen*
-
-<img style="border: 1px solid #666;" src="./images/app-submit-application.png" width="480" alt="App's submit loan application screen">
-
-*Image: App's submit loan application screen*
-<br />
 Finally, the app must be startable with `npm start` (which will start the Angular Live Development Server listening on `localhost:4200`).
 
 ## Miscellaneous Comments and Considerations
