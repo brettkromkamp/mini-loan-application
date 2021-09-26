@@ -109,16 +109,18 @@ The `h2` dependency &mdash;an [in-memory database](https://www.h2database.com/ht
 Finally, the `annotations` dependency has been included so that the integrated development environment (that is, [IntelliJ IDEA](https://www.jetbrains.com/idea/)) will generate appropriate warnings if *null* checks are missing.
 
 ### Part 2: Angular Client App &mdash; Requirements
-The Angular app includes functionality to submit new loan applications together with the ability to check the status of already submitted loan applications. The app must be startable with `npm start` (which will start the Angular Live Development Server listening on `localhost:4200`).
+The Angular app includes functionality to submit new loan applications together with the ability to check the status of already submitted loan applications. 
 
-![./images/app-home.png](App's home screen)
+![App's home screen](./images/app-home.png "App's home screen")
 *App's home screen*
 
-![./images/app-check-status.png](App's check loan application status screen)
+![App's check loan application status screen](./images/app-check-status.png "App's check loan application status screen")
 *App's check loan application status screen*
 
-![./images/app-submit-application.png](App's submit loan application screen)
+![App's submit loan application screen](./images/app-submit-application.png "App's submit loan application screen")
 *App's submit loan application screen*
+
+Finally, the app must be startable with `npm start` (which will start the Angular Live Development Server listening on `localhost:4200`).
 
 ## Miscellaneous Comments and Considerations
 - **Transaction management**: The aim of lazy loading is to save resources by not loading related objects into memory when the main object is loaded. Instead, the initialization of lazy entities is postponed until the moment they're needed. When retrieving lazily-loaded data, there are two steps in the process. First, there's populating the main object, and second, retrieving the data within its proxies. Loading data always requires an open *session* in [Hibernate](https://hibernate.org/). The problem arises when the second step happens after the transaction has closed, which leads to a `LazyInitializationException`.
