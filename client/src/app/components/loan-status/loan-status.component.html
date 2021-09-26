@@ -15,7 +15,12 @@
         <div *ngIf="currentLoan; else noLoan">
             <h4>Loan</h4>
             <div>
-                <label><strong>Status:</strong> {{loanStatus}}</label>
+                <label *ngIf="loanStatus == 'Pending'"><strong>Status:</strong>&nbsp;&nbsp;<span
+                        class="badge badge-info">{{loanStatus}}</span></label>
+                <label *ngIf="loanStatus == 'Approved'"><strong>Status:</strong>&nbsp;&nbsp;<span
+                        class="badge badge-success">{{loanStatus}}</span></label>
+                <label *ngIf="loanStatus == 'Denied'"><strong>Status:</strong>&nbsp;&nbsp;<span
+                        class="badge badge-danger">{{loanStatus}}</span></label>
             </div>
         </div>
         <ng-template #noLoan>
