@@ -109,7 +109,16 @@ The `h2` dependency &mdash;an [in-memory database](https://www.h2database.com/ht
 Finally, the `annotations` dependency has been included so that the integrated development environment (that is, [IntelliJ IDEA](https://www.jetbrains.com/idea/)) will generate appropriate warnings if *null* checks are missing.
 
 ### Part 2: Angular Client App &mdash; Requirements
-Pending.
+The Angular app includes functionality to submit new loan applications together with the ability to check the status of already submitted loan applications. The app must be startable with `npm start` (which will start the Angular Live Development Server listening on `localhost:4200`).
+
+![./images/app-home.png](App's home screen)
+*App's home screen*
+
+![./images/app-check-status.png](App's check loan application status screen)
+*App's check loan application status screen*
+
+![./images/app-submit-application.png](App's submit loan application screen)
+*App's submit loan application screen*
 
 ## Miscellaneous Comments and Considerations
 - **Transaction management**: The aim of lazy loading is to save resources by not loading related objects into memory when the main object is loaded. Instead, the initialization of lazy entities is postponed until the moment they're needed. When retrieving lazily-loaded data, there are two steps in the process. First, there's populating the main object, and second, retrieving the data within its proxies. Loading data always requires an open *session* in [Hibernate](https://hibernate.org/). The problem arises when the second step happens after the transaction has closed, which leads to a `LazyInitializationException`.
@@ -120,7 +129,8 @@ service, it would make more sense to use a [Java LTS release](https://www.oracle
 currently either Java 11 or, the very recently released, Java 17.
 - In relation to [GDPR](https://gdpr-info.eu/) considerations, personal data of the borrowers is not logged when receiving a loan application request. An alternative approach to removing the personal data would be to anonymize it.
 - For testing purposes, upon startup, an example loan application is added to the service's repository.
-- The H2 database also provides the ability to access a database using a browser. If you started the server on the same computer as the browser, open the URL `http://localhost:8080/h2` and provide the driver class of the database, the JDBC URL and user credentials to log in.
+- The H2 database also provides the ability to access the database using a browser. If you started the server on the same computer as the browser, open the URL `http://localhost:8080/h2` and provide the driver class of the database, the JDBC URL and user credentials to log in.
+- At this point, the project does not have any unit tests.
 
 ## Relevant Resources
 - [What is HATEOAS?](https://dzone.com/articles/rest-api-what-is-hateoas)
