@@ -111,13 +111,13 @@ Finally, the `annotations` dependency has been included so that the integrated d
 ### Part 2: Angular Client App &mdash; Requirements
 The Angular app includes functionality to submit new loan applications together with the ability to check the status of already submitted loan applications. 
 
-![App's home screen](./images/app-home.png "App's home screen")
+<img src="./images/app-home.png" width="480" alt="App's home screen">
 *App's home screen*
 
-![App's check loan application status screen](./images/app-check-status.png "App's check loan application status screen")
+<img src="./images/app-check-status.png" width="480" alt="App's check loan application status screen">
 *App's check loan application status screen*
 
-![App's submit loan application screen](./images/app-submit-application.png "App's submit loan application screen")
+<img src="./images/app-submit-application.png" width="480" alt="App's submit loan application screen">
 *App's submit loan application screen*
 
 Finally, the app must be startable with `npm start` (which will start the Angular Live Development Server listening on `localhost:4200`).
