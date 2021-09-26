@@ -24,6 +24,14 @@
                     <input class="form-control" id="deductionFreePeriod" required [(ngModel)]="loan.deductionFreePeriod"
                         name="deductionFreePeriod" placeholder="Deduction free period" />
                 </div>
+                <div class="form-group">
+                    <label for="loanType">Choose type of loan</label>
+                    <select class="form-control" id="loanType" [(ngModel)]="loan.type">
+                        <option *ngFor="let loanType of loanTypes; let i = index" [value]="loanTypes[i].value">
+                            {{loanTypes[i].name}}
+                        </option>
+                    </select>
+                </div>
                 <br />
                 <!-- Borrowers -->
                 <h4>Personal Information</h4>

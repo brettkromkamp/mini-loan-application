@@ -19,6 +19,11 @@ export class LoanCreateComponent implements OnInit {
   }
   submitted = false;
 
+  loanTypes = [
+    { name: 'Annuity', value: 'annuity' },
+    { name: 'Serial', value: 'serial' }
+  ];
+
   constructor(private loanService: LoanService) { }
 
   ngOnInit(): void {
