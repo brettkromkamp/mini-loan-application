@@ -111,7 +111,10 @@ Finally, the `annotations` dependency has been included so that the integrated d
 ### Part 2: Angular Client App &mdash; Requirements
 The Angular app includes functionality to submit new loan applications together with the ability to check the status &mdash;that is, `Pending`, `Denied` or `Approved`&mdash; of already submitted loan applications. Screen shots of the app are available in the repository's `images` directory.
 
-Finally, the app must be startable with `npm start` (which will start the Angular Live Development Server listening on `localhost:4200`).
+What's more, the app must be startable with `npm start` (which will start the Angular Live Development Server listening on `localhost:4200`).
+
+#### Additional Dependencies
+In addition to the required Angular framework dependencies, the following dependency has been included: [Bootstrap widgets](https://ng-bootstrap.github.io/#/home).
 
 ## Miscellaneous Comments and Considerations
 - **Transaction management**: The aim of lazy loading is to save resources by not loading related objects into memory when the main object is loaded. Instead, the initialization of lazy entities is postponed until the moment they're needed. When retrieving lazily-loaded data, there are two steps in the process. First, there's populating the main object, and second, retrieving the data within its proxies. Loading data always requires an open *session* in [Hibernate](https://hibernate.org/). The problem arises when the second step happens after the transaction has closed, which leads to a `LazyInitializationException`.
@@ -123,7 +126,7 @@ currently either Java 11 or, the very recently released, Java 17.
 - In relation to [GDPR](https://gdpr-info.eu/) considerations, personal data of the borrowers is not logged when receiving a loan application request. An alternative approach to removing the personal data would be to anonymize it.
 - For testing purposes, upon startup, an example loan application is added to the service's repository.
 - The H2 database also provides the ability to access the database using a browser. If you started the server on the same computer as the browser, open the URL `http://localhost:8080/h2` and provide the driver class of the database, the JDBC URL and user credentials to log in.
-- At this point, the project does not have any unit tests.
+- At this point, the project does not include any unit tests.
 
 ## Relevant Resources
 - [What is HATEOAS?](https://dzone.com/articles/rest-api-what-is-hateoas)
