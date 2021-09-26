@@ -5,7 +5,7 @@
             <div *ngIf="!submitted">
                 <h4>Loan Details</h4>
                 <div class="form-group">
-                    <label for="name">Amount</label>
+                    <label for="name">Amount (in NOK)</label>
                     <input type="text" class="form-control" id="amount" required [(ngModel)]="loan.amount" name="amount"
                         placeholder="Amount" autofocus />
                 </div>
@@ -15,12 +15,12 @@
                         placeholder="Motivation" />
                 </div>
                 <div class="form-group">
-                    <label for="duration">Duration</label>
+                    <label for="duration">Duration (in months)</label>
                     <input class="form-control" id="duration" required [(ngModel)]="loan.duration" name="duration"
                         placeholder="Duration" />
                 </div>
                 <div class="form-group">
-                    <label for="deductionFreePeriod">Deduction-free period</label>
+                    <label for="deductionFreePeriod">Deduction-free period (in months)</label>
                     <input class="form-control" id="deductionFreePeriod" required [(ngModel)]="loan.deductionFreePeriod"
                         name="deductionFreePeriod" placeholder="Deduction free period" />
                 </div>
@@ -61,7 +61,7 @@
 
             <div *ngIf="submitted">
                 <div class="alert alert-success" role="alert">You successfully created a loan!</div>
-                <button class="btn btn-success" (click)="newLoan()">New loan</button>
+                <button class="btn btn-primary" (click)="newLoan()">New loan</button>
             </div>
         </div>
     </div>

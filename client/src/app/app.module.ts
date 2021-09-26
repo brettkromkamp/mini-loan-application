@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AutofocusDirective } from './autofocus.directive';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     LoanCreateComponent,
     LoanStatusComponent,
-    HomeComponent
+    HomeComponent,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,
