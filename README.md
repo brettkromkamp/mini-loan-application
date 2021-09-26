@@ -113,7 +113,7 @@ Finally, the `annotations` dependency has been included so that the integrated d
 ### Part 2: Angular Client App &mdash; Requirements
 The Angular app includes functionality to submit new loan applications together with the ability to check the status &mdash;that is, `Pending`, `Denied` or `Approved`&mdash; of already submitted loan applications. Screen shots of the app are available in the repository's `images` directory.
 
-What's more, the app must be startable with `npm start` (which will start the Angular Live Development Server listening on `localhost:4200`).
+What's more, the app must be startable with `npm start` (which will start the Angular Live Development Server). The app can be accessed, here: `http://localhost:4200/home`.
 
 #### Additional Dependencies
 In addition to the required Angular framework dependencies, the following dependency has been included: [Bootstrap widgets](https://ng-bootstrap.github.io/#/home).
