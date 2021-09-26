@@ -129,7 +129,7 @@ currently either Java 11 or, the very recently released, Java 17.
 - For testing purposes, upon startup, an example loan application is added to the service's repository.
 - The H2 database also provides the ability to access the database using a browser. If you started the server on the same computer as the browser, open the URL `http://localhost:8080/h2` and provide the driver class of the database, the JDBC URL and user credentials to log in.
 - At this point, the project does not include any unit tests.
-- At this point, for the sake of expediency, the overriden `equals`, `hashCode` and `toString` methods in the model classes (that is, the `Loan` and `Borrower`) are inadequately implemented. 
+- At this point, for the sake of expediency, the overriden `equals`, `hashCode` and `toString` methods in the model classes (that is, the `Loan` and `Borrower` classes) are inadequately implemented. 
 
 ## Relevant Resources
 - [What is HATEOAS?](https://dzone.com/articles/rest-api-what-is-hateoas)
