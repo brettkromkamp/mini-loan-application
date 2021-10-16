@@ -31,7 +31,6 @@ public class LoanServiceImpl implements LoanService {
         } else {
             throw new LoanNotFoundException(id);
         }
-
     }
 
     @Override
@@ -40,7 +39,7 @@ public class LoanServiceImpl implements LoanService {
 
         if (loan.isPresent()) {
             loan.get().setStatus(status);
-            loanRepository.save(loan.get()); // Is this okay?
+            loanRepository.save(loan.get());
         }
     }
 }
